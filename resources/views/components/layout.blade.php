@@ -14,7 +14,7 @@
 </head>
 
 <body class="min-h-screen flex flex-col  bg-base-200 font-sans">
-    <nav class="navbar bg-base-100 mb-8">
+    <nav class="navbar bg-base-100 ">
         <div class="navbar-start">
             <a href="/" class="btn btn-ghost text-xl">🐦 Chirper</a>
         </div>
