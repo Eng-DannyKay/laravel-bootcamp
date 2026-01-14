@@ -5,21 +5,36 @@
 
 
     <div class="max-w-2xl mx-auto flex flex-col gap-4 ">
-        <h1 class="text-3xl font-bold text-center my-8">Recent Chirps</h1>
+
         <div class="card bg-base-100 shadow mt-8">
             <div class="card-body">
-                <form action="/chirps" method="POST">
+              <form method="POST" action="/chirps">
                     @csrf
                     <div class="form-control w-full">
-                    <textarea name="message" rows="3" maxLength="255" class="textarea textarea-bordered w-full focus:border-none focus:outline-none focus:border-gray-300" placeholder="What's on your mind?"></textarea>
+                        <textarea
+                            name="message"
+                            placeholder="What's on your mind?"
+                            class="textarea textarea-bordered w-full resize-none @error('message') textarea-error @enderror"
+                            rows="4"
+                            required
+                            maxlength="255"
+
+                        >{{ old('message') }}</textarea>
+                        @error('message')
+                        <span class="text-error">{{ $message }}</span>
+                        @enderror
                     </div>
-                    <div class="flex justify-end">
-                        <button type="submit" class="btn btn-primary mt-4">Chirp</button>
+
+                    <div class="mt-4 flex items-center justify-end">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            Chirp
+                        </button>
                     </div>
                 </form>
 
             </div>
         </div>
+        <h1 class="text-3xl font-bold text-gray-700">Recent Chirps</h1>
         @forelse ($chirps as $chirp)
             <x-chirp :chirp="$chirp" />
 

@@ -12,7 +12,7 @@
             @else
             <div  class="avatar placeholder">
                 <div class="size-10 rounded-full">
-                     <img src="<https://avatars.laravel.cloud/f61123d5-0b27-434c-a4ae-c653c7fc9ed6?vibe=stealth>"
+                     <img src="https://avatars.laravel.cloud/f61123d5-0b27-434c-a4ae-c653c7fc9ed6?vibe=stealth"
                         alt="Anonymous User"
                         class="rounded-full " />
 
@@ -25,6 +25,16 @@
                     <span class="text-sm font-semibold">{{ $chirp->user ? $chirp->user->name : 'Anonymous' }}</span>
                     <span class="text-base-content/60">·</span>
                     <span class="text-sm text-base-content/60">{{ $chirp->created_at->diffForHumans() }}</span>
+                </div>
+                <div class="flex gap-1">
+                    <a href="/chirps/{{ $chirp->id }}/edit" class="btn btn-ghost btn-xs">Edit</a>
+                    <form action="/chirps/{{ $chirp->id }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this chirp?')" class="btn btn-ghost btn-xs text-error">
+                            Delete
+                        </button>
+                    </form>
                 </div>
 
                 <p class="mt-1">
