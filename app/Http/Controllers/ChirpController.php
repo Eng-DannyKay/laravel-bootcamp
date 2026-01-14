@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chirp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ChirpController extends Controller
 {
@@ -33,13 +34,21 @@ class ChirpController extends Controller
     {
         //
         $validate = $request->validate([
-          'message ' => 'required|string|max:255',
+          'message' => 'required|string|max:255',
+        ],[
+            'message.required' => 'Please write something in the chirp!',
+            'message.max' => 'Chirp cannot exceed 255 characters or less!',
         ]);
 
-        Chirp::create([
+        $chirp = Chirp::create([
             'message' => $validate['message'],
             'user_id' => null
         ]);
+        Log::info('New Chirp created:',[
+            'chirp_id' => $chirp->id,
+            'message' => $chirp->message
+        ]);
+        return redirect('/')->with('success', 'Chirp created successfully !');
     }
 
     /**
@@ -53,9 +62,10 @@ class ChirpController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Chirp $chirp)
     {
         //
+        return view('chirps.edit',compact('chirp'));
     }
 
     /**
