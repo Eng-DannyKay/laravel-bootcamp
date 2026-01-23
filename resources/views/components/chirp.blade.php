@@ -2,7 +2,7 @@
 
 <div class="card bg-base-100 shadow">
     <div class="card-body">
-        <div class="flex gap-4">
+        <div class="flex  gap-4">
             @if ($chirp->user)
             <div class="avatar">
                 <div class="size-10 rounded-full ">
@@ -20,8 +20,9 @@
             </div>
             @endif
 
-            <div class="min-w-0 ">
-                <div class="flex items-center gap-1">
+            <div class="min-w-0 w-full">
+                <div class="flex justify-between w-full">
+                <div class="flex flex-1 items-center gap-1">
                     <span class="text-sm font-semibold">{{ $chirp->user ? $chirp->user->name : 'Anonymous' }}</span>
                     <span class="text-base-content/60">·</span>
                     <span class="text-sm text-base-content/60">{{ $chirp->created_at->diffForHumans() }}</span>
@@ -35,6 +36,7 @@
                             Delete
                         </button>
                     </form>
+                </div>
                 </div>
 
                 <p class="mt-1">
